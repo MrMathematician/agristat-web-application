@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Farm Information</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="wrapper">
+        <nav class="sidebar">
+            <div class="sidebar-header">
+                <h3>Farm Dashboard</h3>
+            </div>
+            <ul class="sidebar-menu">
+                <li><a href="index.html">Dashboard</a></li>
+                <li><a href="farm-info.html" class="active">My Farm Information</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div class="main-content">
+            <section id="myFarm">
+                <h2>My Farm Information</h2>
+                <div class="container">
+                    <div class="box">
+                        <h3>Request Plan</h3>
+                        <button onclick="requestPlan()">Request a Farm Plan</button>
+                    </div>
+                    <div class="box">
+                        <h3>Farm Data (Charts)</h3>
+                        <canvas id="farmChart" width="400" height="200"></canvas>
+                    </div>
+                    <div class="box">
+                        <h3>Weather Predictions</h3>
+                        <select id="monthSelect" onchange="showWeatherPrediction()">
+                            <option value="">Select a Month</option>
+                            <option value="January">January</option>
+                            <option value="February">February</option>
+                            <option value="March">March</option>
+                            <option value="April">April</option>
+                            <option value="May">May</option>
+                            <option value="June">June</option>
+                            <option value="July">July</option>
+                            <option value="August">August</option>
+                            <option value="September">September</option>
+                            <option value="November">November</option>
+                            <option value="December">December</option>
+                        </select>
+                        <div id="weatherResult"></div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
