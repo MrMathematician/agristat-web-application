@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
+const host = '0.0.0.0';
+
 
 // Middleware
 app.use(bodyParser.json());
@@ -75,6 +77,6 @@ app.get('/dashboard', (req, res) => {
 });
 
 // Start server
-app.listen(port, () => {
+app.listen(port, host, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
