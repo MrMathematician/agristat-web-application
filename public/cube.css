@@ -1,0 +1,168 @@
+   /* General page styles */
+   body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    scroll-behavior: smooth;
+}
+
+/* Style for the top bar */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+}
+
+.top-bar button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745; /* Green */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+}
+
+.top-bar button:hover {
+    background-color: #218838; /* Darker green */
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Wrapper for the cubic layout */
+#wrapper {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.viewport {
+    perspective: 1000px;
+    height: 350px;
+}
+
+.cube {
+    position: relative;
+    width: 200px;
+    transform-style: preserve-3d;
+    transform: rotateX(-30deg) rotateY(30deg);
+    animation: rotate 10s infinite linear;
+}
+
+.side {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    background-color: #28a745; /* Green color for the cube */
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border: 1px solid #000;
+    backface-visibility: hidden;
+}
+
+.cube-image {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Cube rotation */
+@keyframes rotate {
+    from { transform: rotateX(-30deg) rotateY(0deg); }
+    to { transform: rotateX(-30deg) rotateY(360deg); }
+}
+
+/* Position the sides of the cube */
+.side:nth-child(1) { transform: rotateY(0deg) translateZ(100px); }
+.side:nth-child(2) { transform: rotateY(90deg) translateZ(100px); }
+.side:nth-child(3) { transform: rotateY(180deg) translateZ(100px); }
+.side:nth-child(4) { transform: rotateY(-90deg) translateZ(100px); }
+.side:nth-child(5) { transform: rotateX(90deg) translateZ(100px); }
+.side:nth-child(6) { transform: rotateX(-90deg) translateZ(100px); }
+
+/* Section styling for scrollable areas below the cube */
+.section {
+    min-height: 80vh; /* Ensure sections are large enough */
+    padding: 40px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    position: relative;
+    overflow: hidden; /* Prevent overflow */
+}
+
+/* Modern background color with shadow and borders */
+#check-weather {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    margin-top: 60px; /* Increased margin to slide down */
+}
+
+#check-rain {
+    background-color: #f1f8e9; /* Light green */
+    border: 1px solid #cddc39;
+}
+
+#crops-health {
+    background-color: #e8f5e9; /* Medium green */
+    border: 1px solid #81c784;
+}
+
+#disease-detection {
+    background-color: #e0f2f1; /* Teal color */
+    border: 1px solid #26a69a;
+}
+
+#manual-access {
+    background-color: #f0f4c3; /* Yellow-green */
+    border: 1px solid #c0ca33;
+}
+
+/* Dialog box */
+dialog {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+/* Section Titles Top-left */
+.section h2 {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+    font-weight: 600;
+}
+
+/* Button styles inside sections */
+.section button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s;
+    position: relative; /* Ensure proper stacking context */
+    margin-top: 40px; /* Added margin to avoid overlap with header */
+}
+
+.section button:hover {
+    background-color: #218838;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
+}

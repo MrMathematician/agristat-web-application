@@ -3,56 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Farm Information</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Farm Information</title>
+    <link rel="stylesheet" href="cube.css">
+  
 </head>
 <body>
-    <div class="wrapper">
-        <nav class="sidebar">
-            <div class="sidebar-header">
-                <h3>Farm Dashboard</h3>
-            </div>
-            <ul class="sidebar-menu">
-                <li><a href="index.html">Dashboard</a></li>
-                <li><a href="farm-info.html" class="active">My Farm Information</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
-            </ul>
-        </nav>
-        <div class="main-content">
-            <section id="myFarm">
-                <h2>My Farm Information</h2>
-                <div class="container">
-                    <div class="box">
-                        <h3>Request Plan</h3>
-                        <button onclick="requestPlan()">Request a Farm Plan</button>
-                    </div>
-                    <div class="box">
-                        <h3>Farm Data (Charts)</h3>
-                        <canvas id="farmChart" width="400" height="200"></canvas>
-                    </div>
-                    <div class="box">
-                        <h3>Weather Predictions</h3>
-                        <select id="monthSelect" onchange="showWeatherPrediction()">
-                            <option value="">Select a Month</option>
-                            <option value="January">January</option>
-                            <option value="February">February</option>
-                            <option value="March">March</option>
-                            <option value="April">April</option>
-                            <option value="May">May</option>
-                            <option value="June">June</option>
-                            <option value="July">July</option>
-                            <option value="August">August</option>
-                            <option value="September">September</option>
-                            <option value="November">November</option>
-                            <option value="December">December</option>
-                        </select>
-                        <div id="weatherResult"></div>
+
+    <!-- Top bar with left and right buttons -->
+    <div class="top-bar">
+      <button onclick="window.location.href='whereami.html'">Navigate your location</button> <!-- Navigateyour.html -->
+      <button onclick="window.location.href='light-intensity.html'">Light intensity monitor</button> <!-- Lightintensity.html -->
+      <button onclick="window.location.href='dashboard.html'">Go Back To Dashboard</button>
+    </div>
+
+    <!-- Wrapper with cubic layout -->
+    <div id="wrapper">
+        <div class="viewport">
+            <div class="cube">
+                <!-- Cube Side 1: Check Weather -->
+                <div class="side">
+                    <div>
+                        <div class="cube-image">Check Weather</div>
+                        <button onclick="scrollToSection('check-weather')">Check</button>
                     </div>
                 </div>
-            </section>
+
+                <!-- Cube Side 2: Check Rain -->
+                <div class="side">
+                    <div>
+                        <div class="cube-image">Check Rain</div>
+                        <button onclick="scrollToSection('check-rain')">Check</button>
+                    </div>
+                </div>
+
+                <!-- Cube Side 3: Crops Health -->
+                <div class="side">
+                    <div>
+                        <div class="cube-image">Crops Health</div>
+                        <button onclick="scrollToSection('crops-health')">Check</button>
+                    </div>
+                </div>
+
+                <!-- Cube Side 4: Disease Detection -->
+                <div class="side">
+                    <div>
+                        <div class="cube-image">Disease Detection</div>
+                        <button onclick="scrollToSection('disease-detection')">Check</button>
+                    </div>
+                </div>
+
+                <!-- Cube Side 5: Request Manual Access -->
+                <div class="side">
+                    <div>
+                        <div class="cube-image">Request Manual Access</div>
+                        <button onclick="scrollToSection('manual-access')">Request</button>
+                    </div>
+                </div>
+
+                <!-- Cube Side 6: More Control in Months -->
+                <div class="side">
+                    <div>
+                        <div class="cube-image">More Control in Months</div>
+                        <button id="open-more-control">More Control</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    <script src="script.js"></script>
+
+    <!-- Scrollable sections below the cube -->
+    <div id="scroll-sections">
+        <!-- Section 1: Check Weather -->
+        <div class="section" id="check-weather">
+            <h2>Check Weather Information</h2>
+            <button>Check Weather Now</button>
+        </div>
+
+        <!-- Section 2: Check Rain -->
+        <div class="section" id="check-rain">
+            <h2>Check Rain Information</h2>
+            <button>Check Rain Now</button>
+        </div>
+
+        <!-- Section 3: Crops Health -->
+        <div class="section" id="crops-health">
+            <h2>Check Crops Health Information</h2>
+            <button>Check Health Now</button>
+        </div>
+
+        <!-- Section 4: Disease Detection -->
+        <div class="section" id="disease-detection">
+            <h2>Disease Detection Information</h2>
+            <button>Check Disease Detection</button>
+        </div>
+
+        <!-- Section 5: Manual Access -->
+        <div class="section" id="manual-access">
+            <h2>Request Manual Access</h2>
+            <button>Request Access</button>
+        </div>
+    </div>
+
+    <!-- Dialog Box -->
+    <dialog id="info-dialog">
+        <h3>More Control Information</h3>
+        <p>Details about more control and future features.</p>
+        <button id="close-dialog">Close</button>
+    </dialog>
+
+    
+
 </body>
 </html>

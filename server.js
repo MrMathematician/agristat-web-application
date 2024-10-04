@@ -89,7 +89,6 @@ app.listen(port, host, () => {
 
 
 
-
 const mysql = require('mysql2');
 
 const connection = mysql.createConnection({
@@ -129,6 +128,35 @@ const createJsonDataTable =
 CREATE TABLE IF NOT EXISTS UserJsonData (
     chipID INT PRIMARY KEY,
     jsonData1 JSON,
+    jsonData2 JSON,
+    jsonData3 JSON,
+    jsonData4 JSON,
+    jsonData5 JSON,
+    jsonData6 JSON,
+    jsonData7 JSON,
+    jsonData8 JSON,
+    jsonData9 JSON,
+    jsonData10 JSON,
+    jsonData11 JSON,
+    jsonData12 JSON,
+    jsonData13 JSON,
+    jsonData14 JSON,
+    jsonData15 JSON,
+    jsonData16 JSON,
+    jsonData17 JSON,
+    jsonData18 JSON,
+    jsonData19 JSON,
+    jsonData20 JSON,
+    jsonData21 JSON,
+    jsonData22 JSON,
+    jsonData23 JSON,
+    jsonData24 JSON,
+    jsonData25 JSON,
+    jsonData26 JSON,
+    jsonData27 JSON,
+    jsonData28 JSON,
+    jsonData29 JSON,
+    jsonData30 JSON,
     FOREIGN KEY (chipID) REFERENCES Users(chipID)
 );`;
 
@@ -152,4 +180,21 @@ connection.query(createJsonDataTable, (err, results) => {
     return;
   }
   console.log('Users table created successfully');
+});
+
+
+
+// FOR TESTING
+let jsonPackets = [];
+
+// RECEIVE JSON POST FROM ARDUINO
+app.post('/your-endpoint', (req, res) => {
+    const packet = req.body;
+    jsonPackets.push(packet);
+
+    // Save the packet to a JSON file
+    const fileName = `packet_${Date.now()}.json`;
+    fs.writeFileSync(fileName, JSON.stringify(packet, null, 2));
+
+    res.send('POST request received and stored');
 });
