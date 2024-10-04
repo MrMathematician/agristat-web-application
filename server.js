@@ -1,8 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express();
-const port = 3000;
-const host = '0.0.0.0';
+const app = express(); const port = 3000; const host = '0.0.0.0';
 
 
 // Middleware
@@ -46,6 +44,8 @@ app.get('/predict', (req, res) => { // THESE NUMBERS WILL VARY BASED ON THE MODE
   res.json(prediction);
 });
 
+
+
 // Default route to serve the main page
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/public/index.html'); // Serve index.html
@@ -79,4 +79,77 @@ app.get('/dashboard', (req, res) => {
 // Start server
 app.listen(port, host, () => {
   console.log(`Server is running on http://localhost:${port}`);
+});
+
+
+
+
+
+
+
+
+
+
+const mysql = require('mysql2');
+
+const connection = mysql.createConnection({
+  host: 'MadMan',
+  user: 'elshafei',
+  password: '123456789',
+  database: 'agrisat_db'
+});
+
+connection.connect((err) => {
+  if (err) {
+    console.error('SQL DATABASE FAILED TO CONNECT! REASON LISTED: \n', err);
+    return;
+  }
+  console.log('DATABASE SUCCESSFULLY CONNECTED!');
+});
+
+
+
+
+
+
+
+const createUsersTable = 
+`CREATE TABLE IF NOT EXISTS Users (
+    chipID INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL
+);
+`;
+
+
+
+const createJsonDataTable = 
+`
+CREATE TABLE IF NOT EXISTS UserJsonData (
+    chipID INT PRIMARY KEY,
+    jsonData1 JSON,
+    FOREIGN KEY (chipID) REFERENCES Users(chipID)
+);`;
+
+
+
+
+
+connection.query(createUsersTable, (err, results) => {
+  if (err) {
+    console.error('Error creating users table:', err);
+    return;
+  }
+  console.log('Users table created successfully');
+});
+
+
+
+connection.query(createJsonDataTable, (err, results) => {
+  if (err) {
+    console.error('Error creating users table:', err);
+    return;
+  }
+  console.log('Users table created successfully');
 });
