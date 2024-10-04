@@ -1,6 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-const app = express(); const port = 3000; const host = '0.0.0.0';
+const app = express(); const port = 8080; const host = '0.0.0.0';
 
 
 // Middleware
@@ -188,7 +188,7 @@ connection.query(createJsonDataTable, (err, results) => {
 let jsonPackets = [];
 
 // RECEIVE JSON POST FROM ARDUINO
-app.post('/your-endpoint', (req, res) => {
+app.post('/upload-json', (req, res) => {
     const packet = req.body;
     jsonPackets.push(packet);
 
