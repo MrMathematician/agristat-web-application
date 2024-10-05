@@ -1,3 +1,12 @@
+
+
+
+
+
+
+
+
+// COMPLETELY USELESS
 const farmData = {
   labels: ["Soil Moisture", "Temperature", "Crop Growth"],
   datasets: [{

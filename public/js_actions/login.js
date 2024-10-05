@@ -62,6 +62,8 @@ function login() {
 
   if(checkUsernameExists(username) && checkPasswordCorrect(password)){
     // PERFORM ACTION
+    window.location.href = "../dashboard.html";
+    localStorage.setItem('USERNAME', username);
     alert("Logged In successfully!");
   }
   else if(checkUsernameExists(username) && !checkPasswordCorrect(password)){
@@ -74,4 +76,7 @@ function login() {
 
 
 // event action
-
+document.getElementById('LOG_IN_MAIN', function(event){
+  event.preventDefault();
+  login();
+})

@@ -1,5 +1,15 @@
 const express = require('express');
+const fs = require('fs');
 const bodyParser = require('body-parser');
+
+
+
+
+
+
+
+
+
 const app = express(); const port = 8080; const host = '0.0.0.0';
 
 
@@ -182,19 +192,138 @@ connection.query(createJsonDataTable, (err, results) => {
   console.log('Users table created successfully');
 });
 
-
+let temp_min = 100000;
+let temp_max = -100000;
 
 // FOR TESTING
 let jsonPackets = [];
 
+const { spawn } = require('child_process');
+const json = require('body-parser/lib/types/json');
+
+
+
+const pythonProcess1 = spawn('python3', ['./model_runner.py', jsonPackets[0], jsonPackets[2], jsonPackets[1], jsonPackets[0], jsonPackets[0], jsonPackets[3], jsonPackets[4], 0, 0]);
+
+pythonProcess1.stdout.on('data', (data) => {
+    console.log(`Output: ${data}`);
+});
+pythonProcess1.stderr.on('data', (data) => {
+    console.error(`Error: ${data}`);
+});
+pythonProcess1.on('close', (code) => {
+    console.log(`Process exited with code ${code}`);
+});
+
+
+
+
+
 // RECEIVE JSON POST FROM ARDUINO
 app.post('/upload-json', (req, res) => {
     const packet = req.body;
-    jsonPackets.push(packet);
+
+    // Extract values from the packet and store them as strings in jsonPackets
+    const values = Object.values(packet).map(value => value.toString());
+    jsonPackets.push(...values);
 
     // Save the packet to a JSON file
     const fileName = `packet_${Date.now()}.json`;
     fs.writeFileSync(fileName, JSON.stringify(packet, null, 2));
 
     res.send('POST request received and stored');
+    displayRainfall();
+    displayPlantDisease();
+    displayVegetationHealth();
+    displayFarmingSuitability();
 });
+
+
+/*
+const filePath1 = './ml_models/rain_prediction_model.pkl';
+const filePath2 = './ml_models/vegetation_health_model.pkl';
+const filePath3 = './ml_models/suitable_for_farming_model.pkl';
+const filePath4 = './ml_models/plant_disease.pkl';
+*/
+
+const filePath5 = './ml_models/rain_prediction_model.txt';
+const filePath6 = './ml_models/vegetation_health_model.txt';
+const filePath7 = './ml_models/suitable_for_farming_model.txt';
+const filePath8 = './ml_models/plant_disease.txt';
+
+function displayRainfall(){
+  fs.readFile(filePath5, 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error reading the file:', err);
+          return;
+      }
+      // Save the file contents into a variable
+      const fileContents = data;
+      if(fileContents == '0'){
+        document.getElementById("RAIN").innerText = "It won't rain soon!";
+      }
+      else{
+        document.getElementById("RAIN").innerText = "It is going to rain soon. You may consider utilizing the rain for natural irrigation!";
+      }
+      console.log('File contents:', fileContents);
+  });
+}
+
+function displayFarmingSuitability(){
+  fs.readFile(filePath6, 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error reading the file:', err);
+          return;
+      }
+      // Save the file contents into a variable
+      const fileContents = data;
+      if(fileContents == '0'){
+        document.getElementById("SUIT").innerText = "The conditions may not be ideal for farming at this time!";
+      }
+      else{
+        document.getElementById("SUIT").innerText = "The conditions are just right to start seeding!";
+      }
+      console.log('File contents:', fileContents);
+  });
+}
+
+function displayPlantDisease(){
+  fs.readFile(filePath7, 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error reading the file:', err);
+          return;
+      }
+      // Save the file contents into a variable
+      const fileContents = data;
+      if(fileContents == '0'){
+        document.getElementById("DISEASE").innerText = "Your plants are healthy and undiseased!";
+      }
+      else if(fileContents == '1'){
+        document.getElementById("DISEASE").innerText = "Please inspect your crops as soon as possible as they most likely suffer from a powdry disease!";
+      }
+      else{
+        document.getElementById("DISEASE").innerText = "Please inspect your crops as soon as possible as they most likely suffer fom a rusty ddisease!";
+      }
+      console.log('File contents:', fileContents);
+  });
+}
+
+function displayVegetationHealth(){
+  fs.readFile(filePath8, 'utf8', (err, data) => {
+      if (err) {
+          console.error('Error reading the file:', err);
+          return;
+      }
+      // Save the file contents into a variable
+      const fileContents = data;
+      if(fileContents == '0'){
+        document.getElementById("HEALTH").innerText = "Your plants are healthy and vegetated well!";
+      }
+      else if(fileContents == '1'){
+      document.getElementById("HEALTH").innerText = "Your plants may need better vegetation!";
+      }
+      console.log('File contents:', fileContents);
+  });
+}
+
+
