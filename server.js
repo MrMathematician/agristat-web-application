@@ -252,10 +252,10 @@ const filePath7 = './ml_models/suitable_for_farming_model.txt';
 const filePath8 = './ml_models/plant_disease.txt';
 
 
-document.getElementById("RAIN").innerText = "It won't rain soon!";
-document.getElementById("SUIT").innerText = "The conditions may not be ideal for farming at this time!";
-document.getElementById("DISEASE").innerText = "Your plants are healthy and undiseased!";
-document.getElementById("HEALTH").innerText = "Your plants are healthy and vegetated well!";
+//document.getElementById("RAIN").innerText = "It won't rain soon!";
+//document.getElementById("SUIT").innerText = "The conditions may not be ideal for farming at this time!";
+//document.getElementById("DISEASE").innerText = "Your plants are healthy and undiseased!";
+//document.getElementById("HEALTH").innerText = "Your plants are healthy and vegetated well!";
 
 function displayRainfall(){
   fs.readFile(filePath5, 'utf8', (err, data) => {
