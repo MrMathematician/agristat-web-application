@@ -83,7 +83,7 @@ app.get('/signup', (req, res) => {
 
 // Route to serve the dashboard page
 app.get('/dashboard', (req, res) => {
-  res.sendFile(__dirname + '/public/dashboard.html');
+  res.sendFile(__dirname + '/public/index.html');
 });
 
 // Start server

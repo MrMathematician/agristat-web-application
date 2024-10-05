@@ -62,7 +62,7 @@ function login() {
 
   if(checkUsernameExists(username) && checkPasswordCorrect(password)){
     // PERFORM ACTION
-    window.location.href = "../dashboard.html";
+    window.location.href = "../index.html";
     localStorage.setItem('USERNAME', username);
     alert("Logged In successfully!");
   }
